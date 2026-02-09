@@ -127,7 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Proyecto1-GestionDePlaylists.cpp" />
+    <ClCompile Include="ConsoleApp.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlaylistService.cpp" />
+    <ClCompile Include="TestList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConsoleApp.h" />
+    <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="DurationUtils.h" />
+    <ClInclude Include="InputValidator.h" />
+    <ClInclude Include="Playlist.h" />
+    <ClInclude Include="PlaylistService.h" />
+    <ClInclude Include="SinglyLinkedList.h" />
+    <ClInclude Include="Song.h" />
+    <ClInclude Include="Storage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

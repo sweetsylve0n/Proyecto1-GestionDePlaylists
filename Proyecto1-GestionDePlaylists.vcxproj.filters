@@ -13,10 +13,69 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{e6775601-7893-4a1f-99c1-06c16e45b4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="models">
+      <UniqueIdentifier>{331da1aa-f967-4168-8d38-4a0458ddafbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="datastructures">
+      <UniqueIdentifier>{2662ffa1-3104-416a-8a59-a6211b12448b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="services">
+      <UniqueIdentifier>{aad11745-ba06-4055-b4eb-3dcf7eeb5af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="persistence">
+      <UniqueIdentifier>{d22a31f4-7607-4fb6-8df2-c5769258b2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{ffcc469a-84a9-4c7c-8a32-d45f33b9c9ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{226042de-ad7e-4511-9a30-e8e4d537846a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Proyecto1-GestionDePlaylists.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConsoleApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="TestList.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaylistService.cpp">
+      <Filter>services</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConsoleApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Song.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="Playlist.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaylistService.h">
+      <Filter>services</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="InputValidator.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DurationUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglyLinkedList.h">
+      <Filter>datastructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DoublyLinkedList.h">
+      <Filter>datastructures</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
