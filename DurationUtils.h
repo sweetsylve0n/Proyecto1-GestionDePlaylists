@@ -6,7 +6,7 @@
 
 using namespace std;
 
-inline int parseDurationToSeconds(const string& input) {
+inline int parseDurationToSeconds(const string& input) { //Metodo para convertir una duracion en formato "mm:ss" o "ss" a segundos, devuelve -1 si el formato es invalido
     string s;
     for (char c : input) if (!isspace((unsigned char)c)) s.push_back(c);
     if (s.empty()) return -1;
@@ -18,7 +18,7 @@ inline int parseDurationToSeconds(const string& input) {
             int sec = stoi(s);
             return sec >= 0 ? sec : -1;
         }
-        catch (...) { return -1; }
+		catch (...) { return -1; } //Devolvemos -1 porque el formato es invalido o el numero es demasiado grande para un int
     }
     else {
         string minStr = s.substr(0, colonPos);
@@ -32,7 +32,7 @@ inline int parseDurationToSeconds(const string& input) {
             if (minutes < 0 || seconds < 0 || seconds >= 60) return -1;
             return minutes * 60 + seconds;
         }
-        catch (...) { return -1; }
+		catch (...) { return -1; } //Validacion de formato invalido 
     }
 }
 
@@ -41,7 +41,7 @@ inline string formatSecondsToMMSS(int totalSeconds) {
     if (totalSeconds < 0) return "0:00";
     int minutes = totalSeconds / 60;
     int seconds = totalSeconds % 60;
-    std::ostringstream oss;
+	std::ostringstream oss; //Usamos std::ostringstream para construir la cadena de forma eficiente
     oss << minutes << ':' << setw(2) << setfill('0') << seconds;
     return oss.str();
 }

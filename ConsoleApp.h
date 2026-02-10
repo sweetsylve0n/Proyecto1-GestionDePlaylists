@@ -2,10 +2,12 @@
 #include "PlaylistService.h"
 #include <string>
 
+//Aqui instanciamos los services y la logica, gracias a esto mantenemos el main limpio
+
 class ConsoleApp {
 public:
     ConsoleApp();
-    ~ConsoleApp();
+	~ConsoleApp(); // Constructor y destructor
     void run();
 
 private:

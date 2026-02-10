@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Proyecto1-GestionDePlaylists.vcxproj" />
+  <Project Path="Proyecto1-GestionDePlaylists.vcxproj" Id="ad447262-3371-47ff-926b-5f62dd95bad6" />
 </Solution>

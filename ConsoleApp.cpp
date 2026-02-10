@@ -11,16 +11,16 @@
 using namespace std;
 
 ConsoleApp::ConsoleApp() = default;
-ConsoleApp::~ConsoleApp() = default;
+ConsoleApp::~ConsoleApp() = default; //Constructor y destructor
 
 void ConsoleApp::run() {
     if (!service.hasSongs()) {
-        cout << "Parece que es la primera vez que usa el sistema.\n";
-        cout << "Debe crear al menos una cancion para continuar.\n";
+        cout << "Parece que es la primera vez que usas el sistema!!\n";
+        cout << "Debess crear al menos una cancion para continuar.\n";
         while (!service.hasSongs()) {
             createSong();
             if (!service.hasSongs()) {
-                cout << "Aún no hay canciones. Debe crear al menos una para continuar.\n";
+                cout << "Aún no hay canciones. Debes crear al menos una para continuar.\n";
             }
         }
     }
@@ -76,14 +76,14 @@ void ConsoleApp::handleOption(int opt) {
 /* -------------------- Canciones -------------------- */
 
 void ConsoleApp::createSong() {
-    string name = readLine("Ingrese nombre de la cancion: ");
+    string name = readLine("Ingresa el nombre de la cancion: ");
     if (name.empty()) { cout << "Nombre vacio. Operacion cancelada.\n"; return; }
-    string artist = readLine("Ingrese artista: ");
+    string artist = readLine("Ingresa el artista: ");
     if (artist.empty()) { cout << "Artista vacio. Operacion cancelada.\n"; return; }
-    string durStr = readLine("Ingrese duracion (mm:ss o ss): ");
+    string durStr = readLine("Ingresa la duracion (mm:ss o ss): ");
     int dur = parseDurationToSeconds(durStr);
     if (dur < 0) {
-        cout << "Formato de duracion invalido. Use mm:ss o segundos.\n";
+        cout << "Formato de duracion invalido. Usa mm:ss o segundos.\n";
         return;
     }
     Song s = service.createSong(name, artist, dur);
@@ -95,7 +95,7 @@ void ConsoleApp::listSongs() {
 }
 
 void ConsoleApp::findSong() {
-    int id = readInt("Ingrese ID de la cancion: ");
+    int id = readInt("Ingresa el ID de la cancion: ");
     Song* s = service.findSongById(id);
     if (!s) cout << "Cancion no encontrada.\n";
     else cout << "ID: " << s->id << " | " << s->name << " - " << s->artist
@@ -103,7 +103,7 @@ void ConsoleApp::findSong() {
 }
 
 void ConsoleApp::editSong() {
-    int id = readInt("Ingrese ID de la cancion a editar: ");
+    int id = readInt("Ingresa el ID de la cancion a editar: ");
     Song* s = service.findSongById(id);
     if (!s) { cout << "Cancion no encontrada.\n"; return; }
     string newName = readLine("Nuevo nombre (enter para mantener): ");
@@ -126,7 +126,7 @@ void ConsoleApp::editSong() {
 }
 
 void ConsoleApp::deleteSong() {
-    int id = readInt("Ingrese ID de la cancion a eliminar: ");
+    int id = readInt("Ingresa el ID de la cancion a eliminar: ");
     if (service.deleteSongById(id)) cout << "cancion eliminada.\n";
     else cout << "No se pudo eliminar la cancion (no existe).\n";
 }
@@ -134,7 +134,7 @@ void ConsoleApp::deleteSong() {
 /* -------------------- Playlists -------------------- */
 
 void ConsoleApp::createPlaylist() {
-    string name = readLine("Ingrese nombre de la playlist: ");
+    string name = readLine("Ingresa el nombre de la playlist: ");
     if (name.empty()) { cout << "Nombre vacio. Operacion cancelada.\n"; return; }
     int id = service.createPlaylist(name);
     cout << "Playlist creada. ID: " << id << "\n";
@@ -145,32 +145,32 @@ void ConsoleApp::listPlaylists() {
 }
 
 void ConsoleApp::addSongToPlaylist() {
-    int pid = readInt("Ingrese ID de la playlist: ");
-    int sid = readInt("Ingrese ID de la Cancion: ");
+    int pid = readInt("Ingresa el ID de la playlist: ");
+    int sid = readInt("Ingresa el ID de la cancion: ");
     if (service.addSongToPlaylist(pid, sid)) cout << "Cancion agregada a la playlist.\n";
     else cout << "No se pudo agregar (playlist o cancion no existe, o ya esta agregada).\n";
 }
 
 void ConsoleApp::listSongsInPlaylist() {
-    int pid = readInt("Ingrese ID de la playlist: ");
+    int pid = readInt("Ingresa el ID de la playlist: ");
     service.listSongsInPlaylist(pid);
 }
 
 void ConsoleApp::removeSongFromPlaylist() {
-    int pid = readInt("Ingrese ID de la playlist: ");
-    int sid = readInt("Ingrese ID de la Cancion a eliminar de la playlist: ");
+    int pid = readInt("Ingresa el ID de la playlist: ");
+    int sid = readInt("Ingresa el ID de la cancion a eliminar de la playlist: ");
     if (service.removeSongFromPlaylist(pid, sid)) cout << "Cancion eliminada de la playlist.\n";
     else cout << "No se pudo eliminar (playlist o cancion no existe en la playlist).\n";
 }
 
 void ConsoleApp::deletePlaylist() {
-    int pid = readInt("Ingrese ID de la playlist a eliminar: ");
+    int pid = readInt("Ingresa el ID de la playlist a eliminar: ");
     if (service.deletePlaylistById(pid)) cout << "Playlist eliminada.\n";
     else cout << "No se pudo eliminar la playlist.\n";
 }
 
 void ConsoleApp::editPlaylistName() {
-    int pid = readInt("Ingrese ID de la playlist a editar: ");
+    int pid = readInt("Ingresa el ID de la playlist a editar: ");
     string newName = readLine("Nuevo nombre: ");
     if (newName.empty()) { cout << "Nombre vacio. Operacion cancelada.\n"; return; }
     if (service.editPlaylistName(pid, newName)) cout << "Playlist renombrada.\n";
@@ -180,14 +180,14 @@ void ConsoleApp::editPlaylistName() {
 /* -------------------- Reproduccion -------------------- */
 
 void ConsoleApp::playPlaylistInOrder() {
-    int pid = readInt("Ingrese ID de la playlist a reproducir en orden: ");
+    int pid = readInt("Ingresa el ID de la playlist a reproducir en orden: ");
     auto ids = service.getSongIdsInPlaylist(pid);
     if (ids.empty()) {
         cout << "La playlist no existe o no tiene canciones.\n";
         return;
     }
     auto songs = service.getSongsByIds(ids);
-    cout << "Reproduciendo en orden (simulado):\n";
+    cout << "Reproduciendo en orden (simulacion):\n";
     for (const auto& s : songs) {
         cout << "Reproduciendo: " << s.name << " - " << s.artist
             << " (" << formatSecondsToMMSS(s.durationSec) << ")\n";
@@ -197,7 +197,7 @@ void ConsoleApp::playPlaylistInOrder() {
 }
 
 void ConsoleApp::playPlaylistShuffle() {
-    int pid = readInt("Ingrese ID de la playlist a reproducir en aleatorio: ");
+    int pid = readInt("Ingresa el ID de la playlist a reproducir en aleatorio: ");
     auto ids = service.getSongIdsInPlaylist(pid);
     if (ids.empty()) {
         cout << "La playlist no existe o no tiene canciones.\n";
@@ -208,7 +208,7 @@ void ConsoleApp::playPlaylistShuffle() {
     std::shuffle(ids.begin(), ids.end(), g);
 
     auto songs = service.getSongsByIds(ids);
-    cout << "Reproduciendo en aleatorio (simulado):\n";
+    cout << "Reproduciendo en aleatorio (simulacion):\n";
     for (const auto& s : songs) {
         cout << "Reproduciendo: " << s.name << " - " << s.artist
             << " (" << formatSecondsToMMSS(s.durationSec) << ")\n";
@@ -219,14 +219,14 @@ void ConsoleApp::playPlaylistShuffle() {
 
 /* -------------------- Utilidades de entrada -------------------- */
 
-string ConsoleApp::readLine(const string& prompt) const {
+string ConsoleApp::readLine(const string& prompt) const { //Metodo para leer una linea de texto desde la consola, mostrando un prompt. Devuelve la linea ingresada por el usuario.
     cout << prompt;
     string line;
     std::getline(cin, line);
     return line;
 }
 
-int ConsoleApp::readInt(const string& prompt) const {
+int ConsoleApp::readInt(const string& prompt) const { //Si el usuario ingresa algo que no es un numero int, se muestra un mensaje de error y se vuelve a solicitar la entrada.
     while (true) {
         cout << prompt;
         string line;
@@ -237,7 +237,7 @@ int ConsoleApp::readInt(const string& prompt) const {
             return v;
         }
         catch (...) {
-            cout << "Entrada invalida. Ingrese un numero entero.\n";
+            cout << "Entrada invalida. Ingresa un numero entero.\n";
         }
     }
 }

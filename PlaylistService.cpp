@@ -4,24 +4,24 @@
 #include <algorithm> 
 #include <vector> 
 
-using namespace std;
+using namespace std; //Aqui si usamos el namespace std para evitar escribirlo cada vez, ya que esta clase hace un uso intensivo de elementos de la libreria estandar como string, vector, cout, y demas
 
 PlaylistService::PlaylistService() : nextSongId(1), nextPlaylistId(1) {}
-PlaylistService::~PlaylistService() = default;
+PlaylistService::~PlaylistService() = default; //Constructor y destructor 
 
 Song PlaylistService::createSong(const string& name, const string& artist, int durationSec) {
     Song s(nextSongId++, name, artist, durationSec);
     songs.push_back(std::move(s));
 
     Song* stored = songs.findById(nextSongId - 1);
-    if (stored) return *stored;
+	if (stored) return *stored; // Devolvemos la canción recién creada desde la lista para asegurar que el ID es correcto y que se ha almacenado correctamente
 
     Song fallback;
     fallback.id = nextSongId - 1;
     fallback.name = name;
     fallback.artist = artist;
     fallback.durationSec = durationSec;
-    return fallback;
+    return fallback; 
 }
 
 void PlaylistService::listAllSongs() const {
@@ -30,12 +30,12 @@ void PlaylistService::listAllSongs() const {
         return;
     }
     songs.traverse([](const Song& s) {
-        cout << "ID: " << s.id << " | " << s.name << " - " << s.artist
-            << " (" << formatSecondsToMMSS(s.durationSec) << ")\n";
+        cout << "ID: " << s.id << " | " << s.name << " - " << s.artist 
+            << " (" << formatSecondsToMMSS(s.durationSec) << ")\n"; 
         });
 }
 
-Song* PlaylistService::findSongById(int id) {
+Song* PlaylistService::findSongById(int id) { // Buscamos la canción por ID y devolvemos un puntero a la canción si se encuentra y nullptr si no se encuentra
     return songs.findById(id);
 }
 
@@ -51,12 +51,11 @@ bool PlaylistService::editSongById(int id, const string& newName, const string& 
 // Helper
 void PlaylistService::removeSongReferences(int songId) {
     playlists.forEach([songId](PlaylistInternal& p) {
-        p.songIds.removeIf([songId](const int& id) { return id == songId; });
+		p.songIds.removeIf([songId](const int& id) { return id == songId; }); // Eliminamos la referencia a la canción en cada playlist
         });
 }
 
 bool PlaylistService::deleteSongById(int id) {
-    // 1) Eliminar referencias en todas las playlists
     removeSongReferences(id);
 
     return const_cast<SinglyLinkedList<Song>&>(songs).removeById(id);
@@ -64,19 +63,19 @@ bool PlaylistService::deleteSongById(int id) {
 
 int PlaylistService::createPlaylist(const string& name) {
     PlaylistInternal p(nextPlaylistId++, name);
-    playlists.push_back(std::move(p));
+	playlists.push_back(std::move(p)); //Usamos el move para evitar copias innecesarias 
     return nextPlaylistId - 1;
 }
 
 // Helper
 PlaylistService::PlaylistInternal* PlaylistService::findPlaylistById(int id) {
-    return playlists.findIf([id](const PlaylistInternal& p) -> bool {
+	return playlists.findIf([id](const PlaylistInternal& p) -> bool { // Buscamos la playlist por ID y devolvemos un puntero a la playlist si se encuentra y nullptr si no se encuentra
         return p.id == id;
         });
 }
 
 bool PlaylistService::addSongToPlaylist(int playlistId, int songId) {
-    Song* s = songs.findById(songId);
+    Song* s = songs.findById(songId); 
     if (!s) return false;
 
     PlaylistInternal* p = findPlaylistById(playlistId);
@@ -84,7 +83,7 @@ bool PlaylistService::addSongToPlaylist(int playlistId, int songId) {
 
     int* found = p->songIds.findIf([songId](const int& id) { return id == songId; });
     if (found) return false; 
-    p->songIds.push_back(songId);
+	p->songIds.push_back(songId); // Agregamos la canción a la playlist, aqui no usamos el move porque estamos agregando un int
     return true;
 }
 
@@ -103,6 +102,8 @@ void PlaylistService::listPlaylists() const {
         cout << "Playlist ID: " << p.id << " | " << p.name << " | Canciones: " << p.songIds.size() << "\n";
         });
 }
+
+//Resto de funciones crud de playlists
 
 void PlaylistService::listSongsInPlaylist(int playlistId) const {
     bool found = false;
