@@ -1,10 +1,11 @@
 #pragma once
 #include <functional>
 #include <iostream>
-#include <utility>   // std::move
+#include <utility>   
 #include <stdexcept>
 
-template<typename T>
+template<typename T> //Utilizamos el template para que la lista pueda almacenar cualquier tipo de dato
+
 class SinglyLinkedList {
 private:
     struct Node {
@@ -17,17 +18,19 @@ private:
     int count;
 
 public:
-    SinglyLinkedList() : head(nullptr), count(0) {}
-    ~SinglyLinkedList() { clear(); }
+    SinglyLinkedList() : head(nullptr), count(0) {} //Constructor y destructor
+    ~SinglyLinkedList() { clear(); } 
 
-    SinglyLinkedList(const SinglyLinkedList&) = delete;
+    //No permitimos copias de la lista
+    SinglyLinkedList(const SinglyLinkedList&) = delete; 
     SinglyLinkedList& operator=(const SinglyLinkedList&) = delete;
 
-    SinglyLinkedList(SinglyLinkedList&& other) noexcept : head(other.head), count(other.count) {
+	SinglyLinkedList(SinglyLinkedList&& other) noexcept : head(other.head), count(other.count) { //Constructor del movimiento de la lista
         other.head = nullptr;
-        other.count = 0;
+        other.count = 0; 
     }
-    SinglyLinkedList& operator=(SinglyLinkedList&& other) noexcept {
+
+    SinglyLinkedList& operator=(SinglyLinkedList&& other) noexcept { 
         if (this != &other) {
             clear();
             head = other.head;
@@ -35,10 +38,10 @@ public:
             other.head = nullptr;
             other.count = 0;
         }
-        return *this;
+		return *this; //Devolvemos el mismo objeto para permitir encadenamiento
     }
 
-    // Inserta al final 
+    // Insertar al final 
     void push_back(T item) {
         Node* node = new Node(std::move(item));
         if (!head) {
@@ -52,7 +55,7 @@ public:
         ++count;
     }
 
-    // Inserta al inicio 
+    // Insertar al inicio 
     void push_front(T item) {
         Node* node = new Node(std::move(item));
         node->next = head;
@@ -60,7 +63,7 @@ public:
         ++count;
     }
 
-    // Elimina el primer elemento que cumpla el parametro. Devuelve true si eliminó.
+    // Eliminar el primer elemento que cumpla el parametro. 
     bool removeIf(std::function<bool(const T&)> predicate) {
         Node* cur = head;
         Node* prev = nullptr;
@@ -82,7 +85,7 @@ public:
         return false;
     }
 
-    // Elimina por id (asume T.id existe). Devuelve true si eliminó.
+    // Eliminar por id 
     bool removeById(int id) {
         return removeIf([id](const T& item) { return item.id == id; });
     }
@@ -97,12 +100,12 @@ public:
         return nullptr;
     }
 
-    // Busca por id
+    // Buscar por id
     T* findById(int id) {
         return findIf([id](const T& item) { return item.id == id; });
     }
 
-    // Recorre la lista 
+    // Recorrer la lista 
     void traverse(std::function<void(const T&)> fn) const {
         Node* cur = head;
         while (cur) {
@@ -111,7 +114,7 @@ public:
         }
     }
 
-    // Recorre la lista permitiendo modificar cada elemento 
+    // Recorrer la lista permitiendo modificar cada elemento 
     void forEach(std::function<void(T&)> fn) {
         Node* cur = head;
         while (cur) {
@@ -129,7 +132,7 @@ public:
         }
     }
 
-    // Vacía la lista 
+    // Vacíar la lista 
     void clear() {
         Node* cur = head;
         while (cur) {
@@ -141,6 +144,7 @@ public:
         count = 0;
     }
 
+	// Validar estado de la lista
     bool isEmpty() const { return head == nullptr; }
     int size() const { return count; }
 };

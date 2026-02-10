@@ -3,12 +3,14 @@
 
 using namespace std;
 
+// Estructura para representar una canción
 struct Song {
     int id;
     string name;
     string artist;
     int durationSec; // duración en segundos, luego hacemos la conversion
 
+	// Constructor 
     Song() : 
         id(0), 
         name(""), 
