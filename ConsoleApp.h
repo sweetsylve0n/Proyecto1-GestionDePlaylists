@@ -40,4 +40,7 @@ private:
     // Utilidades de entrada
     std::string readLine(const std::string& prompt) const;
     int readInt(const std::string& prompt) const;
+    std::string readSongName(const std::string& prompt) const;
+    void clearConsole() const;
+    void pauseAndClear() const;
 };

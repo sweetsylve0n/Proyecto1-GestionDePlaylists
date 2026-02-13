@@ -39,6 +39,10 @@ Song* PlaylistService::findSongById(int id) { // Buscamos la canción por ID y d
     return songs.findById(id);
 }
 
+Song* PlaylistService::findSongByName(const string& name) {
+    return songs.findIf([&](const Song& s) -> bool { return s.name == name; });
+}
+
 bool PlaylistService::editSongById(int id, const string& newName, const string& newArtist, int newDurationSec) {
     Song* s = songs.findById(id);
     if (!s) return false;
@@ -74,8 +78,16 @@ PlaylistService::PlaylistInternal* PlaylistService::findPlaylistById(int id) {
         });
 }
 
+int PlaylistService::findPlaylistIdByName(const string& name) const {
+    int result = -1;
+    playlists.traverse([&](const PlaylistInternal& p) {
+        if (p.name == name) result = p.id;
+    });
+    return result;
+}
+
 bool PlaylistService::addSongToPlaylist(int playlistId, int songId) {
-    Song* s = songs.findById(songId); 
+    Song* s = songs.findById(songId);
     if (!s) return false;
 
     PlaylistInternal* p = findPlaylistById(playlistId);
@@ -126,7 +138,7 @@ void PlaylistService::listSongsInPlaylist(int playlistId) const {
                 });
         }
         });
-    if (!found) cout << "Playlist con ID " << playlistId << " no encontrada.\n";
+    if (!found) cout << "Playlist con ID " << playlistId << " no encontrada...\n";
 }
 
 bool PlaylistService::deletePlaylistById(int playlistId) {

@@ -15,6 +15,7 @@ public:
     void listAllSongs() const;
 
     Song* findSongById(int id);
+    Song* findSongByName(const std::string& name);
     bool editSongById(int id, const std::string& newName, const std::string& newArtist, int newDurationSec);
     bool deleteSongById(int id);
 
@@ -33,6 +34,10 @@ public:
 
     // Editar playlist (renombrar)
     bool editPlaylistName(int playlistId, const std::string& newName);
+
+    // Helpers to expose for ConsoleApp usage
+    // Returns playlist id by name or -1 if not found
+    int findPlaylistIdByName(const std::string& name) const;
 
 private:
     struct PlaylistInternal {
