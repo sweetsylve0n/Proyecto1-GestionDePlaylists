@@ -35,25 +35,24 @@ public:
     // Editar playlist (renombrar)
     bool editPlaylistName(int playlistId, const std::string& newName);
 
-    // Helpers to expose for ConsoleApp usage
-    // Returns playlist id by name or -1 if not found
+    //Buscar por nombre por intuicion del usuario
     int findPlaylistIdByName(const std::string& name) const;
 
-private:
-    struct PlaylistInternal {
-        int id;
-        std::string name;
-        SinglyLinkedList<int> songIds;
-        PlaylistInternal() : id(0), name("") {}
-		PlaylistInternal(int _id, const std::string& _name) : id(_id), name(_name) {} // Constructor para inicializar id y nombre de la playlist
+    private:
+        struct PlaylistInternal {
+            int id;
+            std::string name;
+            SinglyLinkedList<int> songIds;
+            PlaylistInternal() : id(0), name("") {}
+		    PlaylistInternal(int _id, const std::string& _name) : id(_id), name(_name) {} // Constructor para inicializar id y nombre de la playlist
+        };
+
+        SinglyLinkedList<Song> songs;
+	    SinglyLinkedList<PlaylistInternal> playlists; //Manejamos las playlists con una estructura interna que incluye la lista de ids de canciones 
+        int nextSongId;
+        int nextPlaylistId;
+
+        // Helpers
+        PlaylistInternal* findPlaylistById(int id);
+        void removeSongReferences(int songId); 
     };
-
-    SinglyLinkedList<Song> songs;
-	SinglyLinkedList<PlaylistInternal> playlists; //Manejamos las playlists con una estructura interna que incluye la lista de ids de canciones 
-    int nextSongId;
-    int nextPlaylistId;
-
-    // Helpers
-    PlaylistInternal* findPlaylistById(int id);
-    void removeSongReferences(int songId); 
-};

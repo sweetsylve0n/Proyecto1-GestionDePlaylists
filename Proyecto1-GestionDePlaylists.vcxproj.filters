@@ -25,9 +25,6 @@
     <Filter Include="services">
       <UniqueIdentifier>{aad11745-ba06-4055-b4eb-3dcf7eeb5af7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="persistence">
-      <UniqueIdentifier>{d22a31f4-7607-4fb6-8df2-c5769258b2a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{ffcc469a-84a9-4c7c-8a32-d45f33b9c9ce}</UniqueIdentifier>
     </Filter>
@@ -42,11 +39,11 @@
     <ClCompile Include="ConsoleApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="TestList.cpp">
-      <Filter>tests</Filter>
-    </ClCompile>
     <ClCompile Include="PlaylistService.cpp">
       <Filter>services</Filter>
+    </ClCompile>
+    <ClCompile Include="TestList.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,12 +58,6 @@
     </ClInclude>
     <ClInclude Include="PlaylistService.h">
       <Filter>services</Filter>
-    </ClInclude>
-    <ClInclude Include="Storage.h">
-      <Filter>persistence</Filter>
-    </ClInclude>
-    <ClInclude Include="InputValidator.h">
-      <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="DurationUtils.h">
       <Filter>utils</Filter>
