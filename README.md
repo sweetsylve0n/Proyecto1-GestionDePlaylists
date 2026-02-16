@@ -122,9 +122,9 @@ Ventajas:
 
 ## Estado del Desarrollo
 
-### Porcentaje Avanzado: 80%
+### Porcentaje Avanzado: 100%
 
-El proyecto ha completado exitosamente la mayoria de las funcionalidades base. La aplicacion es completamente funcional para crear, gestionar y reproducir canciones en playlists.
+El proyecto ha completado exitosamente la totalidad de los modulos propuestos. La aplicacion es completamente funcional para crear, gestionar y reproducir canciones en playlists.
 
 ### Requerimientos Completados
 
@@ -142,39 +142,14 @@ El proyecto ha completado exitosamente la mayoria de las funcionalidades base. L
 - RF-12: Eliminar cancion de lista de reproduccion
 - RF-13: Eliminar lista de reproduccion
 
-### Requerimientos Pendientes de Desarrollo
 
-#### 1. Persistencia de Datos (Prioridad Alta)
 
-Permitir guardar y cargar datos (canciones y playlists) desde archivos de almacenamiento persistente.
+## Instrucciones para la ejecucion de pruebas unitarias:
 
-Alcance:
-- Implementar serializacion de datos en archivos (JSON, CSV o binario)
-- Cargar datos al iniciar la aplicacion
-- Guardar cambios automaticamente o por solicitud del usuario
-- Manejar errores de lectura/escritura de archivos
-- Ubicacion: Storage.h / Storage.cpp
+Para completar el desarrollo al 100%, se creo un archivo de testing dentro del proyecto, para ejecutar correctamente siga las instrucciones:
 
-#### 2. Busqueda Avanzada de Canciones (Prioridad Media)
-
-Implementar capacidades de busqueda sofisticadas mas alla de buscar solo por ID.
-
-Alcance:
-- Buscar canciones por nombre (busqueda parcial o exacta)
-- Buscar canciones por artista
-- Buscar canciones por duracion (rango)
-- Filtros combinados (nombre AND artista)
-- Ordenamiento de resultados (alfabetico, por duracion, etc.)
-- Ubicacion: PlaylistService (nuevos metodos), ConsoleApp (interfaz)
-
----
-
-## Proximos Pasos
-
-Para completar el desarrollo al 100%:
-
-1. Implementar sistema de persistencia para guardar biblioteca de canciones y playlists
-2. Desarrollar motor de busqueda avanzada con multiples criterios de filtrado
-3. Realizar pruebas unitarias al sistema completo
+1. Dentro del archivo Main.cpp, comente el contenido de int main (asi se evita un cierre abrupto del console app)
+2. Dentro del archivo TestingList.cpp, descomente la totalidad del comtenido de int main. 
+3. Proceda a realizar un build y ejecutar el proyecto.
 
 
